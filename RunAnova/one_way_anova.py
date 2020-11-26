@@ -12,18 +12,23 @@ from RunAnova import *
 # from RunAnova import create_color, run_one_way_anova
 
 class OneWayAnova(dict):
-    def __init__(self, df, resp_var, treatments):
-        self.df = df
+    def __init__(self, df, resp_var, treatments, stack=False):
         self.resp_var = resp_var
         self.treatment = treatments
-        self.init()
-    
-    def init(self):
+        self.stack = stack
         # Reform the dataframe 
-        stack_df = self.df.stack().reset_index()
-        self.stack_df = stack_df.rename(columns={'level_0': 'id',
-                                            'level_1': self.treatment,
-                                            0 : self.resp_var})
+        if stack: # TO DO: create a self.df
+            self.stack_df = df
+            dict_ = {} 
+            for treat in df[treatments].unique():
+                dict_.update({treat: df.loc[df[treatments] == treat, resp_var].values})
+            self.df = pd.DataFrame.from_dict(dict_)
+        else:
+            self.df = df
+            stack_df = self.df.stack().reset_index()
+            self.stack_df = stack_df.rename(columns={'level_0': 'id',
+                                                'level_1': self.treatment,
+                                                0 : self.resp_var})
         self.treatments = self.df.columns
         self.sample_size_dict = {treat: len(self.df[treat]) for treat in self.df}
         self.create_color()
