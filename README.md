@@ -13,40 +13,45 @@ pip install dist/RunAnova-1.0a0-py3-none-any.whl
 ## Run example notebooks
 
 ### One way using RunAnova
- - example_oneway_breakfast_test.ipynb
+ - ```example_oneway_breakfast_test.ipynb```
 
 ### One way using classic packages
-- example_without_library.ipynb
+- ```example_without_library.ipynb```
 
 
 ### Two ways using RunAnova
-- two_ways_test.ipynb
+- ```two_ways_test.ipynb```
 
 
 ## Results
 
-
 ### Example of results for one way configuration:
 For the following example dataframe:
 
-![img1](imgs/df_oneway.png)
-you can init a OneWayAnova object:
+![img1](imgs/df_oneway.png | width=100)
+
+Init a OneWayAnova object:
 ```python
 resp_var = 'attention_span'
 treatments = "meal_quantity"
 anov = OneWayAnova(df=exp_df, resp_var=resp_var , treatments=treatments)
+```
+Have insight from data with 
+```python
 anov.show_distribution()
 ```
-and obtain nice displays like
-![img2](imgs/display_oneway.png)
+![img2](imgs/display_oneway.png| width=100)
+And run ANOVA analysis:
 
 ```python
-anov.run_anova(simple=True)
-anov.run_anova(simple=False)
+anov(simple=True)
+anov(simple=False)
 ```
 
 The output of ANOVA is either simple:
-```F stat: 4.9, p-value: 0.03```
+```
+F stat: 4.9, p-value: 0.03
+```
 or detailed:
 ```
 ##### Decomposition of variance #####
@@ -65,9 +70,9 @@ eta squared: 0.45 omega_squared: 58.45
 
 ### Example of results for two way configuration:
 For the following example dataframe
-![3](imgs/df_twoway.png)
+![3](imgs/df_twoway.png| width=100)
 
-you can init a TwoWayAnova class object:
+Init and call a TwoWayAnova class object:
 
 ```python
 from RunAnova import two_way_anova
