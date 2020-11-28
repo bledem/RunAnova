@@ -1,5 +1,9 @@
-*.DS_Store
+.DS_Store
 *__pycache__
 *.vscode
 *.ipynb_checkpoints
-*.png
+build/*
+*egg_info
+.vscode
+.ipynb_checkpoints*
+

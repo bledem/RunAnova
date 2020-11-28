@@ -27,15 +27,18 @@ pip install dist/RunAnova-1.0a0-py3-none-any.whl
 
 
 ### Example of results for one way configuration:
-![1](imgs/df_oneway)
+For the following example dataframe:
+
+![img1](imgs/df_oneway.png)
+you can init a OneWayAnova object:
 ```python
 resp_var = 'attention_span'
 treatments = "meal_quantity"
 anov = OneWayAnova(df=exp_df, resp_var=resp_var , treatments=treatments)
 anov.show_distribution()
 ```
-You obtain nice displays like
-![2](imgs/display_oneway)
+and obtain nice displays like
+![img2](imgs/display_oneway.png)
 
 ```python
 anov.run_anova(simple=True)
@@ -45,7 +48,7 @@ anov.run_anova(simple=False)
 The output of ANOVA is either simple:
 ```F stat: 4.9, p-value: 0.03```
 or detailed:
-```python
+```
 ##### Decomposition of variance #####
 Grand Mean 12.13
 SST: 58.53, dof k-1:  2, MST: 29.27
@@ -61,11 +64,10 @@ eta squared: 0.45 omega_squared: 58.45
 ```
 
 ### Example of results for two way configuration:
-![3](imgs/df_twoway)
+For the following example dataframe
+![3](imgs/df_twoway.png)
 
-and obtain by running:
-
-
+you can init a TwoWayAnova class object:
 
 ```python
 from RunAnova import two_way_anova
