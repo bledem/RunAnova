@@ -1,0 +1,13 @@
+Metadata-Version: 1.2
+Name: RunAnova
+Version: 1.0a0
+Summary: Run ANOVA
+Home-page: https://github.com/bledem
+Author: Betty LD
+Author-email: 
+License: MIT
+Description: Run One Way and Two Anova and few tests
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7

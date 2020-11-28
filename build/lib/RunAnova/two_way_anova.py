@@ -8,7 +8,7 @@ import scipy.stats as stats
 from statsmodels.formula.api import ols
 import statsmodels.api as sm
 
-from utils.anova import compute_two_way_critic_val
+from RunAnova import compute_two_way_critic_val
 
 class TwoWayAnova(dict):
     def __init__(self, df, resp_var, factors_levels):
@@ -24,7 +24,7 @@ class TwoWayAnova(dict):
         # each combination of different levels from each factor is one treatment
         self.factors = [f for f in self.factors_levels]
         self.mean_table = self.df.groupby(self.factors).mean()
-        print(self.mean_table)
+        display(self.mean_table)
         self.n = len(self.df) # a * b * r
 
     def plot_interaction_response(self):
@@ -36,7 +36,7 @@ class TwoWayAnova(dict):
                     style='gas', markers=True, dashes=False)
         plt.title('Interaction plot for response')
 
-    def __call__(self, simple=True, loc=0.95):
+    def run_anova(self, simple=True, loc=0.95):
         """ 
         Run two-ways anova (=with two factors). 
         """
@@ -56,20 +56,4 @@ class TwoWayAnova(dict):
                 print('We reject the null hypothesis for', anov_results.index[i])
             else:
                 print('We fail to reject the null hypothesis for', anov_results.index[i])   
-    
-
-if __name__ == "__main__":
-    factors_levels = {'wheel':[], 'gas':[]}
-    #create data
-    df = pd.DataFrame({'wheel': np.tile(['two', 'four'], 4),
-                    'gas': np.tile(['regular', 'octane', 'octane', 'regular'],2),
-                    'consumption': [26.7, 26.1, 32.3, 28.6,
-                            25.2, 24.2, 32.8, 29.3]})
-    print(df)               
-    for col in df.columns:
-        if col in factors_levels:
-            factors_levels[col] = list(df[col].unique())
-    anova_proc = TwoWayAnova(df, resp_var='consumption', factors_levels=factors_levels)
-    anova_proc()
-
            

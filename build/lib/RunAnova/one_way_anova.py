@@ -7,11 +7,8 @@ import seaborn as sns
 from matplotlib.patches import Rectangle
 import scipy.stats as stats
 
-from utils.normality_test import *
-from utils.anova import run_one_way_anova
-from utils.confidence_interval import *
-from utils.display_fn import create_color
-
+from RunAnova import *
+# from RunAnova import create_color, run_one_way_anova
 
 class OneWayAnova(dict):
     def __init__(self, df, resp_var, treatments, stack=False):
@@ -34,7 +31,7 @@ class OneWayAnova(dict):
         self.treatments = self.df.columns
         self.sample_size_dict = {treat: len(self.df[treat]) for treat in self.df}
         self.create_color()
-        # self.compute_indep_ci(loc= 0.95, show=True)
+        self.compute_indep_ci(loc= 0.95, show=True)
 
     def create_color(self):
         self.colors = create_color(self.treatments)
@@ -70,7 +67,7 @@ class OneWayAnova(dict):
         CI_df = compute_indep_ci(self.df)
         self.CI_df = CI_df.sort_values(by=['Mean'])
         print(f'For a level of confidence of {loc}')
-        print(self.CI_df)
+        display(self.CI_df)
         if show:
             for i, treat in enumerate(self.df):
                 sub_df = self.df[treat]
@@ -112,7 +109,7 @@ class OneWayAnova(dict):
             run_levene(self.df)
             # if p-value >0.05 non-statistically significant difference in their varability
     
-    def __call__(self, simple=True, loc=0.95):
+    def run_anova(self, simple=True, loc=0.95):
         """ 
         Compute pre-package ANOVA or every steps of ANOVA table
         #SSE = "How spread is the data inside this sampme compare with the sample mean" (dive-in-view)
@@ -138,5 +135,4 @@ if __name__ == "__main__":
 
     exp_df = pd.DataFrame(experiment)
     exp_df.index.name = "observation"
-    anova_proc = OneWayAnova(exp_df, resp_var=resp_var, treatments=treatment)
-    anova_proc()
+    anova_proc = Anov(exp_df, resp_var=resp_var, treatment=treatment)

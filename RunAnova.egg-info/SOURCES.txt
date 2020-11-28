@@ -1,0 +1,11 @@
+README.md
+setup.py
+RunAnova/__init__.py
+RunAnova/main.py
+RunAnova/one_way_anova.py
+RunAnova/two_way_anova.py
+RunAnova.egg-info/PKG-INFO
+RunAnova.egg-info/SOURCES.txt
+RunAnova.egg-info/dependency_links.txt
+RunAnova.egg-info/requires.txt
+RunAnova.egg-info/top_level.txt
