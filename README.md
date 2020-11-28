@@ -28,22 +28,20 @@ pip install dist/RunAnova-1.0a0-py3-none-any.whl
 ### Example of results for one way configuration:
 For the following example dataframe:
 
-![img1](imgs/df_oneway.png =100x)
+| No breakfast | Light breakfast | Full breaskfast | 
+| ------------- | ------------- | ------------- |
+| 8  | 14  | 10 |
+| 7  | 16  | 12 | 
+| 9 | 12| 16 | 
+| 13 | 17 | 15 | 
+| 10 | 11 | 12| 
 
-Init a OneWayAnova object:
+Init and call a OneWayAnova object:
 ```python
+from RunAnova import OneWayAnova
 resp_var = 'attention_span'
 treatments = "meal_quantity"
 anov = OneWayAnova(df=exp_df, resp_var=resp_var , treatments=treatments)
-```
-Have insight from data with 
-```python
-anov.show_distribution()
-```
-![img2](imgs/display_oneway.png =100x)
-And run ANOVA analysis:
-
-```python
 anov(simple=True)
 anov(simple=False)
 ```
@@ -69,14 +67,20 @@ eta squared: 0.45 omega_squared: 58.45
 ```
 
 ### Example of results for two way configuration:
-For the following example dataframe
-![3](imgs/df_twoway.png =100x)  
+
 
 Init and call a TwoWayAnova class object:
 
 ```python
-from RunAnova import two_way_anova
+from RunAnova import TwoWayAnova
 factors_levels = {'wheel':[], 'gas':[]}
+df = pd.DataFrame({'wheel': np.tile(['two', 'four'], 4),
+                   'gas': np.tile(['regular', 'octane', 'octane', 'regular'],2),
+                   'consumption': [26.7, 26.1, 32.3, 28.6,
+                          25.2, 24.2, 32.8, 29.3]})      
+for col in df.columns:
+    if col in factors_levels:
+        factors_levels[col] = list(df[col].unique())
 anova_proc = TwoWayAnova(df, resp_var='consumption', factors_levels=factors_levels)
 anova_proc()
 ```
