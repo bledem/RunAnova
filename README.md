@@ -28,7 +28,7 @@ pip install dist/RunAnova-1.0a0-py3-none-any.whl
 ### Example of results for one way configuration:
 For the following example dataframe:
 
-![img1](imgs/df_oneway.png | width=100)
+![img1](imgs/df_oneway.png =100x)
 
 Init a OneWayAnova object:
 ```python
@@ -40,7 +40,7 @@ Have insight from data with
 ```python
 anov.show_distribution()
 ```
-![img2](imgs/display_oneway.png| width=100)
+![img2](imgs/display_oneway.png =100x)
 And run ANOVA analysis:
 
 ```python
@@ -70,7 +70,7 @@ eta squared: 0.45 omega_squared: 58.45
 
 ### Example of results for two way configuration:
 For the following example dataframe
-![3](imgs/df_twoway.png| width=100)
+![3](imgs/df_twoway.png =100x)  
 
 Init and call a TwoWayAnova class object:
 
