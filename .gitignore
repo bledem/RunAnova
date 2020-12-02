@@ -6,4 +6,4 @@ build/*
 *.RunAnova.egg_info
 .vscode
 .ipynb_checkpoints*
-
+*.jovianrc*
